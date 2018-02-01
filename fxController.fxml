@@ -6,12 +6,11 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<ScrollPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxController">
+<ScrollPane prefHeight="1000.0" prefWidth="1000.0" style="-fx-background: DAE6F3;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxController">
    <content>
-      <FlowPane fx:id="flow" hgap="4.0" prefHeight="1000.0" prefWidth="1000.0" prefWrapLength="680.0" style="-fx-background-color: DAE6F3;" vgap="4.0">
+      <FlowPane fx:id="flow" hgap="4.0" prefWrapLength="680.0" style="-fx-background-color: DAE6F3;" vgap="4.0">
          <children>
-            <Pane fx:id="upperPane" prefHeight="28.0" prefWidth="1000.0">
+            <Pane fx:id="upperPane" prefWidth="998.0">
                <children>
                 <Button fx:id="backButton" mnemonicParsing="false" onAction="#onClick" prefHeight="29.0" prefWidth="96.0" text="BACK" />
                </children>
