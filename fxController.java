@@ -24,15 +24,12 @@ public class fxController {
 		formerPath = dir.getAbsolutePath() + "//..";
 		File filesName[] = dir.listFiles();
 		bt = new Button[filesName.length];
-		ImageView[] iv = new ImageView[filesName.length];
-		String[] filePath = new String[filesName.length];
 		for(int i = 0; i < filesName.length; i++){
+			final int tmpNum = i;
+			bt[i] = new Button(filesName[i].getName());
+			flow.getChildren().add(bt[i]);
 			if(filesName[i].isFile()){
-				iv[i] = new ImageView("res//fileNone.png");
-				bt[i] = new Button(filesName[i].getName(),iv[i]);
-				filePath[i] = filesName[i].getPath();
-				flow.getChildren().add(bt[i]);
-				final int tmpNum = i;
+				bt[i].setGraphic(new ImageView("res//fileNone.png"));
 				bt[i].setOnAction( (ActionEvent) -> {
 					System.out.println(filesName[tmpNum].getName());
 					try{
@@ -41,16 +38,12 @@ public class fxController {
 					}
 				});
 			}else{
+				final String filePath = filesName[i].getPath();
 				System.out.println(filesName[i]);
-				iv[i] = new ImageView("res//file.png");
-				bt[i] = new Button(filesName[i].getName(),iv[i]);
-				filePath[i] = filesName[i].getPath();
-				final String tmp = filePath[i];
-				final int tmpNum = i;
-				flow.getChildren().add(bt[i]);
+				bt[i].setGraphic(new ImageView("res//file.png"));
 				bt[i].setOnAction( (ActionEvent) -> {
 					System.out.println(filesName[tmpNum].getName());
-					changeDirectory(tmp);
+					changeDirectory(filePath);
 				});
 			}
 		}
