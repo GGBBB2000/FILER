@@ -2,7 +2,6 @@ import java.awt.Desktop;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -27,11 +26,6 @@ public class fxController {
 		bt = new Button[filesName.length];
 		ImageView[] iv = new ImageView[filesName.length];
 		String[] filePath = new String[filesName.length];
-		flow.setPadding(new Insets(5, 0, 5, 0));
-		flow.setVgap(4);
-		flow.setHgap(4);
-		flow.setPrefWrapLength(680); // preferred width allows for two columns
-		flow.setStyle("-fx-background-color: DAE6F3;");
 		for(int i = 0; i < filesName.length; i++){
 			if(filesName[i].isFile()){
 				iv[i] = new ImageView("res//fileNone.png");
