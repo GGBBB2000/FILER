@@ -10,22 +10,16 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
 public class fxController {
-	ImageView iv[];
 	Button bt[];
 	String formerPath;
-	String filePath[];
-	Desktop dt = Desktop.getDesktop();
 	Label alart = new Label("アクセスが禁じられています");
-	int filesNum;
 
 	@FXML
 	FlowPane flow;
-	Button backButton;
-	Pane upperPane;
 
 	@FXML
 	void initialize(){
-		printContents("/Users/hitoshi/GoogleDrive/");
+		printContents("/Users");
 	}
 
 	void printContents(String path){
@@ -37,9 +31,9 @@ public class fxController {
 		formerPath = dir.getAbsolutePath() + "//..";
 		File filesName[] = dir.listFiles();
 		bt = new Button[filesName.length];
-		iv = new ImageView[filesName.length];
-		filePath = new String[filesName.length];
-		filesNum = filesName.length;
+		ImageView[] iv = new ImageView[filesName.length];
+		String[] filePath = new String[filesName.length];
+		int filesNum = filesName.length;
 		flow.setPadding(new Insets(5, 0, 5, 0));
 		flow.setVgap(4);
 		flow.setHgap(4);
@@ -55,7 +49,7 @@ public class fxController {
 				bt[i].setOnAction( (ActionEvent) -> {
 					System.out.println(filesName[tmpNum].getName());
 					try{
-						dt.open(filesName[tmpNum]);
+						Desktop.getDesktop().open(filesName[tmpNum]);
 					}catch(Exception e){
 					}
 				});
@@ -81,9 +75,7 @@ public class fxController {
 
 	@FXML
 	void onClick(ActionEvent e){
-		for(int j = 0; j < filesNum; j++){
-			flow.getChildren().removeAll(bt[j]);
-		}
+		flow.getChildren().removeAll(bt);
 		printContents(formerPath);
 	}
 }
