@@ -32,7 +32,7 @@ public class fxController {
 				bt[i] = new Button(filesName[i].getName(),iv[i]);
 				filePath[i] = filesName[i].getPath();
 				flow.getChildren().add(bt[i]);
-				int tmpNum = i;
+				final int tmpNum = i;
 				bt[i].setOnAction( (ActionEvent) -> {
 					System.out.println(filesName[tmpNum].getName());
 					try{
@@ -46,15 +46,11 @@ public class fxController {
 				bt[i] = new Button(filesName[i].getName(),iv[i]);
 				filePath[i] = filesName[i].getPath();
 				final String tmp = filePath[i];
-				final int num = filesName.length;
-				int tmpNum = i;
+				final int tmpNum = i;
 				flow.getChildren().add(bt[i]);
 				bt[i].setOnAction( (ActionEvent) -> {
 					System.out.println(filesName[tmpNum].getName());
-					for(int j = 0; j < num; j++){
-						flow.getChildren().removeAll(bt[j]);
-					}
-					printContents(tmp);
+					changeDirectory(tmp);
 				});
 			}
 		}
@@ -62,7 +58,11 @@ public class fxController {
 
 	@FXML
 	void onClick(ActionEvent e){
+		changeDirectory(formerPath);
+	}
+
+	void changeDirectory(String s) {
 		flow.getChildren().removeAll(bt);
-		printContents(formerPath);
+		printContents(s);
 	}
 }
