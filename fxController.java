@@ -1,29 +1,15 @@
-import java.net.URL;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.application.Application;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import java.awt.Desktop;
+import java.io.File;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.event.EventHandler;
-import javafx.scene.image.Image;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.geometry.Insets;
-import javafx.fxml.FXML;
-import java.io.File;
-import javafx.scene.paint.Color;
-import javafx.application.HostServices;
-import java.awt.Desktop;
-public class fxController implements Initializable {
+
+public class fxController {
 	ImageView iv[];
 	Button bt[];
 	String formerPath;
@@ -37,17 +23,16 @@ public class fxController implements Initializable {
 	Button backButton;
 	Pane upperPane;
 
-	@Override
-	public void initialize(URL url,ResourceBundle rb){
-		printContents("/Users");
+	@FXML
+	void initialize(){
+		printContents("/Users/hitoshi/GoogleDrive/");
 	}
-	
-	public void printContents(String path){
+
+	void printContents(String path){
 		if(alart != null){
 			flow.getChildren().remove(alart);
 		}
 		int count = 0;
-		//formerPath = path + "//..";
 		File dir = new File(path);
 		formerPath = dir.getAbsolutePath() + "//..";
 		File filesName[] = dir.listFiles();
@@ -67,17 +52,15 @@ public class fxController implements Initializable {
 				filePath[i] = filesName[i].getPath();
 				flow.getChildren().add(bt[i]);
 				int tmpNum = i;
-				bt[i].setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent actionEvent) {
-						System.out.println(filesName[tmpNum].getName());
-						try{
-							dt.open(filesName[tmpNum]);
-						}catch(Exception e){
-						}
+				bt[i].setOnAction( (ActionEvent) -> {
+					System.out.println(filesName[tmpNum].getName());
+					try{
+						dt.open(filesName[tmpNum]);
+					}catch(Exception e){
 					}
 				});
 			}else{
+				System.out.println(filesName[i]);
 				iv[i] = new ImageView("res//file.png");
 				bt[i] = new Button(filesName[i].getName(),iv[i]);
 				filePath[i] = filesName[i].getPath();
@@ -85,20 +68,19 @@ public class fxController implements Initializable {
 				final int num = filesName.length;
 				int tmpNum = i;
 				flow.getChildren().add(bt[i]);
-				bt[i].setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent actionEvent) {
-						System.out.println(filesName[tmpNum].getName());
-						for(int j = 0; j < num; j++){
-							flow.getChildren().removeAll(bt[j]);
-						}
-						printContents(tmp);
+				bt[i].setOnAction( (ActionEvent) -> {
+					System.out.println(filesName[tmpNum].getName());
+					for(int j = 0; j < num; j++){
+						flow.getChildren().removeAll(bt[j]);
 					}
+					printContents(tmp);
 				});
 			}
 		}
 	}
-	public void onClick(ActionEvent e){
+
+	@FXML
+	void onClick(ActionEvent e){
 		for(int j = 0; j < filesNum; j++){
 			flow.getChildren().removeAll(bt[j]);
 		}

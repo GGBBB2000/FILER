@@ -1,12 +1,7 @@
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class fx extends Application {
 	Stage stage;
@@ -14,8 +9,7 @@ public class fx extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		stage = primaryStage;
 		primaryStage.setTitle("Filer");
-		Pane myPane_top = (Pane)FXMLLoader.load(getClass().getResource("fxController.fxml"));
-		Scene myScene = new Scene(myPane_top);
+		Scene myScene = new Scene(FXMLLoader.load(getClass().getResource("fxController.fxml")));
 		primaryStage.setScene(myScene);
 		primaryStage.show();
 	}
